@@ -1,0 +1,29 @@
+name: Run Repository Analysis
+
+on:
+  workflow_dispatch:
+    inputs:
+      repo_url:
+        description: "GitHub repository URL to analyze"
+        required: true
+        default: "https://github.com/octocat/Hello-World"
+      branch:
+        description: "Branch name"
+        required: true
+        default: "main"
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run external analyze action
+        id: analyze
+        uses: minwoo-dev/analyze-action@v1
+        with:
+          repo_url: ${{ github.event.inputs.repo_url }}
+          branch: ${{ github.event.inputs.branch }}
+
+      - name: Output result
+        run: |
+          echo "분석 결과 JSON:"
+          echo '${{ steps.analyze.outputs.result_json }}'
