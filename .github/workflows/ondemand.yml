@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Run external analyze action
         id: analyze
-        uses: sparrow-cloud/ondemand-analysis-action@v1
+        uses: sparrow-cloud/ondemand-analysis-action
         with:
           repo_url: ${{ github.event.inputs.repo_url }}
           branch: ${{ github.event.inputs.branch }}
