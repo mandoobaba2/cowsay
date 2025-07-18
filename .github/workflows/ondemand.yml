@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Run external analyze action
         id: analyze
-        uses: minwoo-dev/analyze-action@v1
+        uses: sparrow-cloud/ondemand-analysis-action@v1
         with:
           repo_url: ${{ github.event.inputs.repo_url }}
           branch: ${{ github.event.inputs.branch }}
