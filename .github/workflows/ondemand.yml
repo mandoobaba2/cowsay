@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Run external analyze action
         id: analyze
-        uses: mandoobaba2/ondemand-analysis-action
+        uses: mandoobaba2/ondemand-analysis-action@main
         with:
           repo_url: ${{ github.event.inputs.repo_url }}
           branch: ${{ github.event.inputs.branch }}
