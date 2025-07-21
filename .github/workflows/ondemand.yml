@@ -16,6 +16,14 @@ jobs:
   analyze:
     runs-on: ubuntu-latest
     steps:
+      - name: debug check (Caller Workflow)
+        shell: bash
+        run: |
+          echo "ls -al: " \
+          ls -al \
+          echo "pwd: " \
+          pwd \
+
       - name: Run external analyze action
         id: analyze
         uses: mandoobaba2/ondemand-analysis-action@main
