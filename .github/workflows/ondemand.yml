@@ -16,24 +16,4 @@ jobs:
   analyze:
     runs-on: ubuntu-latest
     steps:
-      - name: test echo 1
-        id: test1
-        run: |
-          echo "test echo 1"
-
-      - name: Run external analyze action
-        id: analyze
-        uses: sparrow-cloud/ondemand-analysis-action
-        with:
-          repo_url: ${{ github.event.inputs.repo_url }}
-          branch: ${{ github.event.inputs.branch }}
-
-      # - name: Output result
-      #   run: |
-      #     echo "분석 결과 JSON:"
-      #     echo '${{ steps.analyze.outputs.result_json }}'
-
-      - name: test echo 2
-        id: test2
-        run: |
-          echo "test echo 2"
+      - run: echo "Hello from test"
