@@ -16,4 +16,14 @@ jobs:
   analyze:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hello from test"
+      - name: Run external analyze action
+        id: analyze
+        uses: mandoobaba2/ondemand-analysis-action
+        with:
+          repo_url: ${{ github.event.inputs.repo_url }}
+          branch: ${{ github.event.inputs.branch }}
+
+      # - name: Output result
+      #   run: |
+      #     echo "분석 결과 JSON:"
+      #     echo '${{ steps.analyze.outputs.result_json }}'
