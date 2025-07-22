@@ -2,26 +2,33 @@ name: Run Repository Analysis
 
 on:
   workflow_dispatch:
-    inputs:
-      repo_url:
-        description: "GitHub repository URL to analyze"
-        required: true
-        default: "https://github.com/mandoobaba2/cowsay"
-      branch:
-        description: "Branch name"
-        required: true
-        default: "master"
 
 jobs:
   analyze:
     runs-on: ubuntu-latest
     steps:
+      - name: Extract repo info
+        id: extract
+        run: |
+          REPO_URL="https://github.com/${GITHUB_REPOSITORY}"
+
+          if [[ "$GITHUB_REF" == refs/heads/* ]]; then
+            BRANCH_NAME="${GITHUB_REF#refs/heads/}"
+          elif [[ "$GITHUB_HEAD_REF" != "" ]]; then
+            BRANCH_NAME="$GITHUB_HEAD_REF"
+          else
+            BRANCH_NAME="unknown"
+          fi
+
+          echo "repo_url=$REPO_URL" >> $GITHUB_OUTPUT
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+
       - name: Run external analyze action
         id: analyze-sparrow-ondemand
         uses: mandoobaba2/ondemand-analysis-action@main
         with:
-          repo_url: ${{ github.event.inputs.repo_url }}
-          branch: ${{ github.event.inputs.branch }}
+          repo_url: ${{ steps.extract.outputs.repo_url }}
+          branch: ${{ steps.extract.outputs.branch_name }}
           ondemand_api_key: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMjAiLCJpc3MiOiJvbmRlbWFuZCIsInRva2VuSWQiOjM2LCJ1c2VybmFtZSI6InRlc3R1c2VybWluIiwicm9sZXMiOiJVU0VSIiwiZXhwIjoxOTc3NTQyNjQwfQ.TDsalhu-VQx4HzXCrf-v7AlEpnnFXHVvWViH67JLAoUWn_4N8agX7Dz2jUBPK89uwd3YvqJLuvbcWt8cmHT4Xg
 
       - name: Print output variables
