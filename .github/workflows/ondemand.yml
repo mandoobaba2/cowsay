@@ -34,7 +34,11 @@ jobs:
           branch: ${{ github.event.inputs.branch }}
           ondemand_api_key: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMjAiLCJpc3MiOiJvbmRlbWFuZCIsInRva2VuSWQiOjM2LCJ1c2VybmFtZSI6InRlc3R1c2VybWluIiwicm9sZXMiOiJVU0VSIiwiZXhwIjoxOTc3NTQyNjQwfQ.TDsalhu-VQx4HzXCrf-v7AlEpnnFXHVvWViH67JLAoUWn_4N8agX7Dz2jUBPK89uwd3YvqJLuvbcWt8cmHT4Xg
 
-      # - name: Output result
-      #   run: |
-      #     echo "분석 결과 JSON:"
-      #     echo '${{ steps.analyze.outputs.result_json }}'
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: analysis-report
+          path: ${{ steps.analyze.outputs.report_path }}
+      
+      - name: Print JSON summary
+        run: echo "${{ steps.analyze.outputs.result_summary }}"
