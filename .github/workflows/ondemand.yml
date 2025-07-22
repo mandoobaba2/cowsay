@@ -16,16 +16,6 @@ jobs:
   analyze:
     runs-on: ubuntu-latest
     steps:
-      - name: debug ls -al (Caller Workflow)
-        shell: bash
-        run: |
-          ls -al
-          
-      - name: debug pwd (Caller Workflow)
-        shell: bash
-        run: |
-          pwd
-
       - name: Run external analyze action
         id: analyze-sparrow-ondemand
         uses: mandoobaba2/ondemand-analysis-action@main
@@ -40,12 +30,12 @@ jobs:
           echo "${{ steps.analyze-sparrow-ondemand.outputs.result_summary }}"
           echo "report_path:"
           echo "${{ steps.analyze-sparrow-ondemand.outputs.report_path }}"
+      
+      - name: Print JSON summary
+        run: echo "${{ steps.analyze-sparrow-ondemand.outputs.result_summary }}"
 
       - name: Upload report artifact
         uses: actions/upload-artifact@v4
         with:
           name: analysis-report
           path: ${{ steps.analyze-sparrow-ondemand.outputs.report_path }}
-      
-      - name: Print JSON summary
-        run: echo "${{ steps.analyze-sparrow-ondemand.outputs.result_summary }}"
