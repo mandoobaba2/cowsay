@@ -1,4 +1,4 @@
-name: Run Repository Analysis
+name: Run Repository Analysis By Sparrow On-Demand 
 
 on:
   workflow_dispatch:
@@ -27,16 +27,10 @@ jobs:
         id: analyze-sparrow-ondemand
         uses: mandoobaba2/ondemand-analysis-action@main
         with:
+          ondemand_api_key: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMjAiLCJpc3MiOiJvbmRlbWFuZCIsInRva2VuSWQiOjM2LCJ1c2VybmFtZSI6InRlc3R1c2VybWluIiwicm9sZXMiOiJVU0VSIiwiZXhwIjoxOTc3NTQyNjQwfQ.TDsalhu-VQx4HzXCrf-v7AlEpnnFXHVvWViH67JLAoUWn_4N8agX7Dz2jUBPK89uwd3YvqJLuvbcWt8cmHT4Xg
           repo_url: ${{ steps.extract.outputs.repo_url }}
           branch: ${{ steps.extract.outputs.branch_name }}
-          ondemand_api_key: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMjAiLCJpc3MiOiJvbmRlbWFuZCIsInRva2VuSWQiOjM2LCJ1c2VybmFtZSI6InRlc3R1c2VybWluIiwicm9sZXMiOiJVU0VSIiwiZXhwIjoxOTc3NTQyNjQwfQ.TDsalhu-VQx4HzXCrf-v7AlEpnnFXHVvWViH67JLAoUWn_4N8agX7Dz2jUBPK89uwd3YvqJLuvbcWt8cmHT4Xg
-
-      - name: Print output variables
-        run: |
-          echo "result_summary:"
-          echo "${{ steps.analyze-sparrow-ondemand.outputs.result_summary }}"
-          echo "report_path:"
-          echo "${{ steps.analyze-sparrow-ondemand.outputs.report_path }}"
+          vcs_auth_token: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Print JSON summary
         run: echo "${{ steps.analyze-sparrow-ondemand.outputs.result_summary }}"
