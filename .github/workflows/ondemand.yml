@@ -27,7 +27,7 @@ jobs:
           pwd
 
       - name: Run external analyze action
-        id: analyze
+        id: analyze-sparrow-ondemand
         uses: mandoobaba2/ondemand-analysis-action@main
         with:
           repo_url: ${{ github.event.inputs.repo_url }}
@@ -37,15 +37,15 @@ jobs:
       - name: Print output variables
         run: |
           echo "result_summary:"
-          echo "${{ steps.analysis.outputs.result_summary }}"
+          echo "${{ steps.analyze-sparrow-ondemand.outputs.result_summary }}"
           echo "report_path:"
-          echo "${{ steps.analysis.outputs.report_path }}"
+          echo "${{ steps.analyze-sparrow-ondemand.outputs.report_path }}"
 
       - name: Upload report artifact
         uses: actions/upload-artifact@v4
         with:
           name: analysis-report
-          path: ${{ steps.analyze.outputs.report_path }}
+          path: ${{ steps.analyze-sparrow-ondemand.outputs.report_path }}
       
       - name: Print JSON summary
-        run: echo "${{ steps.analyze.outputs.result_summary }}"
+        run: echo "${{ steps.analyze-sparrow-ondemand.outputs.result_summary }}"
