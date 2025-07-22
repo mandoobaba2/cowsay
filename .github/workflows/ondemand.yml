@@ -34,6 +34,13 @@ jobs:
           branch: ${{ github.event.inputs.branch }}
           ondemand_api_key: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMjAiLCJpc3MiOiJvbmRlbWFuZCIsInRva2VuSWQiOjM2LCJ1c2VybmFtZSI6InRlc3R1c2VybWluIiwicm9sZXMiOiJVU0VSIiwiZXhwIjoxOTc3NTQyNjQwfQ.TDsalhu-VQx4HzXCrf-v7AlEpnnFXHVvWViH67JLAoUWn_4N8agX7Dz2jUBPK89uwd3YvqJLuvbcWt8cmHT4Xg
 
+      - name: Print output variables
+        run: |
+          echo "result_summary:"
+          echo "${{ steps.analysis.outputs.result_summary }}"
+          echo "report_path:"
+          echo "${{ steps.analysis.outputs.report_path }}"
+
       - name: Upload report artifact
         uses: actions/upload-artifact@v4
         with:
