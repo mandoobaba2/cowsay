@@ -1,4 +1,5 @@
 # cowsay
+[![Badge](https://github.com/mandoobaba2/cowsay/actions/workflows/ondemand.yml/badge.svg)](https://github.com/mandoobaba2/cowsay/actions/workflows/ondemand.yml)
 
 ````
  __________________
