@@ -31,7 +31,6 @@ jobs:
           repo_url: ${{ steps.extract.outputs.repo_url }}
           branch: ${{ steps.extract.outputs.branch_name }}
           vcs_auth_token: ${{ secrets.GITHUB_TOKEN }}
-          push_readme: true
       
       - name: Print JSON summary
         run: echo "${{ steps.analyze-sparrow-ondemand.outputs.result_summary }}"
