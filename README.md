@@ -167,3 +167,12 @@ say({
 
 <!-- ANALYSIS-RESULTS:START -->
 <!-- ANALYSIS-RESULTS:END -->
+
+
+## 🔍 Latest Analysis
+
+# 📊 Analysis Result Summary
+
+| Total Issue | Very High | High | Medium | Low | Very Low |
+|------|------|----------|---------|---------|---------|
+| 1 | 0 | 0 | 0 | 1 | 0 |
